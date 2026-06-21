@@ -11,6 +11,11 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		FAB3DDD72FE730F6002FCF5C /* Views */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Views;
+			sourceTree = "<group>";
+		};
 		FACBB9942FE720F300DD5352 /* HabitFlow */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = HabitFlow;
@@ -34,6 +39,7 @@
 			children = (
 				FACBB9942FE720F300DD5352 /* HabitFlow */,
 				FACBB9932FE720F300DD5352 /* Products */,
+				FAB3DDD72FE730F6002FCF5C /* Views */,
 			);
 			sourceTree = "<group>";
 		};
@@ -61,6 +67,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
+				FAB3DDD72FE730F6002FCF5C /* Views */,
 				FACBB9942FE720F300DD5352 /* HabitFlow */,
 			);
 			name = HabitFlow;
