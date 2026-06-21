@@ -37,7 +37,7 @@ struct HabitsListView: View {
             }
             
             .sheet(isPresented: $showingAddHabit) {
-                Text("Add Habit Form Placeholder")
+                AddHabitView(viewModel: viewModel)
             }
         }
     }
