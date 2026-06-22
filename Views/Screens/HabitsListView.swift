@@ -15,12 +15,14 @@ struct HabitsListView: View {
         NavigationStack {
             List {
                 ForEach(viewModel.items) { habit in
-                    VStack(alignment: .leading) {
-                        Text(habit.title)
-                            .font(.headline)
-                        Text(habit.description)
-                            .font(.subheadline)
-                            .foregroundStyle(.secondary)
+                    NavigationLink(value: habit.id) {
+                        VStack(alignment: .leading) {
+                            Text(habit.title)
+                                .font(.headline)
+                            Text(habit.description)
+                                .font(.subheadline)
+                                .foregroundStyle(.secondary)
+                        }
                     }
                 }
                 .onDelete { offsets in
@@ -38,6 +40,10 @@ struct HabitsListView: View {
             
             .sheet(isPresented: $showingAddHabit) {
                 AddHabitView(viewModel: viewModel)
+            }
+            
+            .navigationDestination(for: UUID.self) { id in
+                HabitDetailView(habitId: id, viewModel: viewModel)
             }
         }
     }

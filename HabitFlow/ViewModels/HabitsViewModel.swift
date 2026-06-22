@@ -27,5 +27,9 @@ final class HabitsViewModel {
             items[index] = updatedHabit
         }
     }
+    
+    func findHabit(id: UUID) -> HabitItem {
+        items.first(where: { $0.id == id }) ?? HabitItem(title: "Error", description: "Not Found")
+    }
 }
 
