@@ -9,7 +9,23 @@ import SwiftUI
 
 @Observable
 final class HabitsViewModel {
-    var items: [HabitItem] = []
+    var items: [HabitItem] = [] {
+        didSet {
+            save()
+        }
+    }
+    
+    private let saveKey = "SavedHabits"
+    
+    init() {
+        if let savedData = UserDefaults.standard.data(forKey: saveKey) {
+            if let decodedItems = try? JSONDecoder().decode([HabitItem].self, from: savedData) {
+                self.items = decodedItems
+                return
+            }
+        }
+        self.items = []
+    }
     
     func addHabit(title: String, description: String) {
         let item = HabitItem(title: title, description: description)
@@ -30,6 +46,12 @@ final class HabitsViewModel {
     
     func findHabit(id: UUID) -> HabitItem {
         items.first(where: { $0.id == id }) ?? HabitItem(title: "Error", description: "Not Found")
+    }
+    
+    private func save() {
+        if let encoded = try? JSONEncoder().encode(items) {
+            UserDefaults.standard.set(encoded, forKey: saveKey)
+        }
     }
 }
 
