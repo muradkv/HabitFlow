@@ -13,20 +13,24 @@ struct HabitsListView: View {
     
     var body: some View {
         NavigationStack {
-            List {
-                ForEach(viewModel.items) { habit in
-                    NavigationLink(value: habit.id) {
-                        VStack(alignment: .leading) {
-                            Text(habit.title)
-                                .font(.headline)
-                            Text(habit.description)
-                                .font(.subheadline)
-                                .foregroundStyle(.secondary)
+            ZStack {
+                List {
+                    ForEach(viewModel.items) { habit in
+                        NavigationLink(value: habit.id) {
+                            HabitRowView(habit: habit)
                         }
                     }
+                    .onDelete { offsets in
+                        viewModel.deleteHabit(at: offsets)
+                    }
                 }
-                .onDelete { offsets in
-                    viewModel.deleteHabit(at: offsets)
+                
+                if viewModel.items.isEmpty {
+                    ContentUnavailableView {
+                        Label("No Habits Yet", systemImage: "checklist")
+                    } description: {
+                        Text("Consistency is the key. Tap the plus button to create your first daily spark.")
+                    }
                 }
             }
             .navigationTitle("HabitFlow")
